@@ -1,0 +1,35 @@
+# Simple Atlantis configuration for demo
+version: 3
+
+# Projects configuration
+projects:
+  - name: simple-demo
+    dir: terraform
+    workspace: default
+    terraform_version: v1.5.7
+
+    # Auto-plan when these files change
+    autoplan:
+      when_modified: ["*.tf"]
+      enabled: true
+
+    # Apply requirements - remove approval requirement for demo
+    apply_requirements: ["mergeable"]
+
+# Simple workflow
+workflows:
+  default:
+    plan:
+      steps:
+        - run: echo "🔍 Starting Terraform plan..."
+        - run: terraform fmt -check
+        - run: terraform validate
+        - init
+        - plan
+        - run: echo "✅ Plan completed!"
+
+    apply:
+      steps:
+        - run: echo "🚀 Starting Terraform apply..."
+        - apply
+        - run: echo "✅ Apply completed!"

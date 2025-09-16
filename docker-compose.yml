@@ -1,0 +1,47 @@
+# Simple Docker Compose for Atlantis demo
+version: '3.8'
+
+services:
+  atlantis:
+    image: runatlantis/atlantis:v0.27.0
+    container_name: atlantis-demo
+    restart: unless-stopped
+
+    ports:
+      - "4141:4141"
+
+    environment:
+      # GitHub Configuration
+      ATLANTIS_GH_USER: ${ATLANTIS_GH_USER}
+      ATLANTIS_GH_TOKEN: ${ATLANTIS_GH_TOKEN}
+      ATLANTIS_GH_WEBHOOK_SECRET: ${ATLANTIS_GH_WEBHOOK_SECRET}
+      ATLANTIS_REPO_ALLOWLIST: ${ATLANTIS_REPO_ALLOWLIST}
+
+      # Server Configuration
+      ATLANTIS_PORT: 4141
+      ATLANTIS_ATLANTIS_URL: ${ATLANTIS_ATLANTIS_URL}
+      ATLANTIS_DATA_DIR: /atlantis-data
+      ATLANTIS_LOG_LEVEL: info
+
+      # Terraform Configuration
+      ATLANTIS_DEFAULT_TF_VERSION: v1.5.7
+      ATLANTIS_HIDE_PREV_PLAN_COMMENTS: true
+
+    volumes:
+      - atlantis-data:/atlantis-data
+      - ./atlantis.yaml:/etc/atlantis/atlantis.yaml:ro
+
+    command: >
+      server
+      --config=/etc/atlantis/atlantis.yaml
+
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:4141/healthz"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+volumes:
+  atlantis-data:
+    driver: local
