@@ -3,7 +3,7 @@ version: '3.8'
 
 services:
   atlantis:
-    image: runatlantis/atlantis:v0.27.0
+    image: ghcr.io/runatlantis/atlantis:latest
     container_name: atlantis-demo
     restart: unless-stopped
 

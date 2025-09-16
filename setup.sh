@@ -150,7 +150,7 @@ start_atlantis() {
     else
         # Use direct Docker commands
         print_status "Pulling Atlantis Docker image..."
-        docker pull runatlantis/atlantis:v0.27.0
+        docker pull ghcr.io/runatlantis/atlantis:latest
 
         # Stop existing container if running
         docker stop atlantis-demo 2>/dev/null || true
@@ -163,7 +163,7 @@ start_atlantis() {
             -v "$(pwd)/atlantis.yaml:/etc/atlantis/atlantis.yaml:ro" \
             -v atlantis-data:/atlantis-data \
             --env-file .env \
-            runatlantis/atlantis:v0.27.0 \
+            ghcr.io/runatlantis/atlantis:latest \
             server --config=/etc/atlantis/atlantis.yaml
     fi
 
