@@ -22,6 +22,8 @@
 ├── atlantis.yaml        # Atlantis 配置
 ├── docker-compose.yml   # Docker 配置
 ├── demo-atlantis.sh     # 一键演示脚本 🆕
+├── start-atlantis.sh    # 启动 Atlantis 服务器 🆕
+├── stop-atlantis.sh     # 停止 Atlantis 服务器 🆕
 ├── .env.example         # 环境变量模板
 ├── .gitignore          # Git 忽略文件
 └── README.md           # 本文件
@@ -42,7 +44,20 @@
 - ✅ 启动 ngrok 隧道
 - ✅ 显示完整的配置信息和下一步操作
 
-### 方法二：手动设置
+### 方法二：使用 Atlantis 服务器脚本
+
+```bash
+# 启动 Atlantis 服务器
+./start-atlantis.sh
+
+# 在另一个终端启动 ngrok
+ngrok http 4141
+
+# 停止 Atlantis 服务器
+./stop-atlantis.sh
+```
+
+### 方法三：手动设置
 
 #### 前置要求
 
