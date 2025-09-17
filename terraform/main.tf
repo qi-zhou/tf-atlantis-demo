@@ -17,6 +17,6 @@ resource "null_resource" "example" {
   }
 
   provisioner "local-exec" {
-    command = "echo 'Hello from Atlantis! Timestamp: ${timestamp()}'"
+    command = "echo 'Hello world from Atlantis! Timestamp: ${timestamp()}'"
   }
 }
