@@ -20,3 +20,13 @@ resource "null_resource" "example" {
     command = "echo 'Hello from Atlantis! Timestamp: ${timestamp()}'"
   }
 }
+
+resource "null_resource" "demo" {
+  triggers = {
+    timestamp = timestamp()
+  }
+
+  provisioner "local-exec" {
+    command = "echo 'Hello from Atlantis! Timestamp: ${timestamp()}'"
+  }
+}
