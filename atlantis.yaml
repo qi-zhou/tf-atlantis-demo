@@ -17,7 +17,6 @@ projects:
     apply_requirements: ["mergeable"]
     
     # Explicitly allow apply_requirements to be overridden
-    workflow: default
 
 # Simple workflow
 workflows:
