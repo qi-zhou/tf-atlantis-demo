@@ -1,0 +1,5 @@
+# Server-side configuration for Atlantis demo
+repos:
+  - id: github.com/qi-zhou/tf-atlantis-demo
+    allowed_overrides: [workflow, apply_requirements]
+    allow_custom_workflows: true

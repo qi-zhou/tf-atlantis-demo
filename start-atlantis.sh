@@ -46,6 +46,7 @@ docker run -d \
   --name atlantis-demo \
   -p 4141:4141 \
   -v $(pwd):/atlantis-data \
+  -v $(pwd)/server-config.yaml:/etc/atlantis/repos.yaml:ro \
   -w /atlantis-data \
   -e ATLANTIS_GH_USER="$ATLANTIS_GH_USER" \
   -e ATLANTIS_GH_TOKEN="$ATLANTIS_GH_TOKEN" \
@@ -59,7 +60,8 @@ docker run -d \
   --gh-user="$ATLANTIS_GH_USER" \
   --gh-token="$ATLANTIS_GH_TOKEN" \
   --gh-webhook-secret="$ATLANTIS_GH_WEBHOOK_SECRET" \
-  --repo-allowlist="$ATLANTIS_REPO_ALLOWLIST"
+  --repo-allowlist="$ATLANTIS_REPO_ALLOWLIST" \
+  --repo-config=/etc/atlantis/repos.yaml
 
 # Wait for container to start
 sleep 3
